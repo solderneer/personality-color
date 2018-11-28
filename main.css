@@ -1,17 +1,75 @@
 /* Standard consistent element styles */
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+
+     /* Ease the transition between colors */
+     -webkit-transition:background-color 1s ease;
+     -moz-transition:background-color 1s ease;
+     -o-transition:background-color 1s ease;
+     transition:background-color 1s ease;
 }
 
 h1 {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 300;
-    font-size: 4em;
+    font-family: 'Pacifico', cursive;
+    font-size: 6em;
+    margin: 0px;
 }
 
 h2 {
     font-family: 'Raleway', sans-serif;
-    font-weight: 100;
-    font-size: 1.3em;
+    font-size: 1.5em;
+    margin: 0px;
+    margin-top: 0.5em;
 }
 
+/* Page styling (flexbox) */
+.page {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Button styling */
+button {
+    outline: none;
+    border: none;
+    border-radius: 1.1em;
+    background-color: white;
+    height: 2.2em;
+    width: 6em;
+
+    box-shadow: rgba(0, 0, 0, 0.05) 0 5px 20px;
+    transition: box-shadow 0.5s;
+    
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+  }
+  button:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0 5px 20px;
+    transition: box-shadow 0.5s;
+  }
+
+  /* Main page styling */
+  #start {
+    margin-top: 2em;
+    height: 3em;
+    width: 15em;
+    border-radius: 1.5em;
+
+    -webkit-transition:color 1s ease;
+    -moz-transition:color 1s ease;
+    -o-transition:color 1s ease;
+    transition:color 1s ease;
+  }
+  
+  .two {
+      display: none;
+  }
