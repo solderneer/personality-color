@@ -70,6 +70,10 @@ button {
     transition:color 1s ease;
   }
   
-  .two {
-      display: none;
-  }
+  /* questions */
+ .question {
+     display: none;
+ }
+ .question h2 {
+    font-size: 3em;
+ }
