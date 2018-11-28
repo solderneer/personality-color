@@ -24,14 +24,7 @@ var lastpage = '.two'
 var currentquestion = 0
 var currentcolor = 0 // In terms of colours list index
 
-var points_map = {
-    'red': 0,
-    'orange': 0,
-    'yellow': 0,
-    'green': 0,
-    'blue': 0,
-    'purple': 0,
-}
+var points_arr = [0,0,0,0,0,0]
 
 // -------------------- UTILITIES --------------------- //
 function pageSwitch(selector1, selector2) {
@@ -72,12 +65,10 @@ function nextQuestion(question) {
         lastpage = page
         page = '.two'
         document.querySelector('#q2').innerText = question
-        console.log('hi page 2')
     } else if(page === '.two') {
         lastpage = page
         page = '.one'
         document.querySelector('#q1').innerText = question
-        console.log('hi page 1')
     }
 
     pageSwitch(lastpage, page)
@@ -85,31 +76,32 @@ function nextQuestion(question) {
 
 // Should have a better gamestep which is random
 function gameStep(isTrue) {
-    points_map[colours[currentcolor]] += isTrue // Add the point
+    points_arr[currentcolor] += isTrue // Add the point
 
     if(currentcolor < 5) {
         currentcolor++
     } else {
         currentcolor = 0
 
-        if(currentquestion < 3) {
+        if(currentquestion < 2) {
             currentquestion++
         } else {
             endGame()
         }
     }
-    console.log(points_map)
+}
+
+function mean(numbers) {
+    var total = 0, i;
+    for (i = 0; i < numbers.length; i += 1) {
+        total += numbers[i];
+    }
+    return total / numbers.length;
 }
 
 function endGame() {
-    var sum = 0
-    var pt_sum = 0
-    for(var i = 0; i < colours.length; i++) {
-        sum += (i+1) * (points_map[colours[i]])
-        pt_sum += points_map[colours[i]]
-    }
-
-    return (sum/pt_sum)
+    console.log(points_arr)
+    console.log(mean(points_arr))
 }
 // ----------------------------------------------------- MAIN CODE ------------------------------------------------- //
 document.addEventListener("DOMContentLoaded", function(event) {
