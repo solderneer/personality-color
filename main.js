@@ -21,7 +21,7 @@ var questions_matrix = [
 // ---------------------- STATE ---------------------------------------- //
 var page = '.one'
 var lastpage = '.two'
-var currentquestion = 0
+var currentquestion = 2
 var currentcolor = 0 // In terms of colours list index
 
 var points_arr = [0,0,0,0,0,0]
@@ -91,17 +91,11 @@ function gameStep(isTrue) {
     }
 }
 
-function mean(numbers) {
-    var total = 0, i;
-    for (i = 0; i < numbers.length; i += 1) {
-        total += numbers[i];
-    }
-    return total / numbers.length;
-}
-
+// Redirect them to the approriate status page
 function endGame() {
     console.log(points_arr)
-    console.log(mean(points_arr))
+    document.querySelector('#final').innerText = 'You are a blue-green'
+    pageSwitch(page, '.results');
 }
 // ----------------------------------------------------- MAIN CODE ------------------------------------------------- //
 document.addEventListener("DOMContentLoaded", function(event) {

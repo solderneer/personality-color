@@ -124,5 +124,10 @@ button {
  }
  .question h2 {
     font-size: 3rem;
-    margin: 0px 3em;
+    padding: 0px 1em;
+ }
+
+ /* Finishing page */
+ .results {
+     display: none;
  }
