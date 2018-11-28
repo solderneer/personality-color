@@ -35,7 +35,7 @@ function pageSwitch(selector1, selector2) {
             { value: '30%', duration: 1000 }
         ],
         opacity: 0,
-        duration: 500,
+        duration: 1000,
         elasticity: 0,
         loop: false,
         complete: function(anim) {
@@ -50,7 +50,7 @@ function pageSwitch(selector1, selector2) {
             { value: '50%', duration: 1000 }
         ],
         opacity: 1,
-        duration: 500,
+        duration: 1000,
         elasticity: 0,
         loop: false,
         begin: function(anim) {
@@ -112,11 +112,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var cnt = 1
     var colorswitch = setInterval(function() {
         document.querySelector('body').style.background = hex_map[colours[cnt]]
-        document.querySelectorAll('.back')[0].style.color = hex_map[colours[cnt]]
+        document.querySelectorAll('#start')[0].style.color = hex_map[colours[cnt]]
         cnt = (cnt + 1) % 6
-    }, 3000)
+    }, 2000)
 
     document.querySelector('#start').addEventListener('click', function() {
+        // Switching to black and white
+        clearInterval(colorswitch);
+        document.querySelector('body').style.background = 'white'
+        document.querySelector('body').style.color = 'black'
+        document.querySelector('.topnav').style.borderBottomColor = 'black'
+
         document.querySelector('#q1').innerText = questions_matrix[currentcolor][currentquestion]
         pageSwitch('.main', '.question.one')
     })

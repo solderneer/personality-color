@@ -39,7 +39,7 @@ h2 {
 }
 
 .topnav a {
-    color: #f2f2f2;
+    color: inherit;
     padding-top: 30px;
     padding-bottom: 15px;
     text-decoration: none;
@@ -54,7 +54,6 @@ h2 {
 }
 
 .topnav a.active {
-    color: white;
     font-weight: 700;
 }
 
@@ -85,13 +84,15 @@ button {
 
     box-shadow: rgba(0, 0, 0, 0.05) 0 5px 20px;
     transition: box-shadow 0.5s;
+    transition: transform 0.5s;
     
     font-family: 'Raleway', sans-serif;
     text-transform: uppercase;
   }
   button:hover {
     box-shadow: rgba(0, 0, 0, 0.1) 0 5px 20px;
-    transition: box-shadow 0.5s;
+    transition: transform 0.5s;
+    transform: scale(1.04);
   }
 
   /* Main page styling */
@@ -115,7 +116,13 @@ button {
  .question {
      display: none;
  }
+
+ .question button {
+    background-color: black;
+    color: white;
+    margin: 2em 1em;
+ }
  .question h2 {
     font-size: 3rem;
-    margin: 0px 20px;
+    margin: 0px 3em;
  }
