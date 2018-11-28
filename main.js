@@ -83,6 +83,7 @@ function nextQuestion(question) {
     pageSwitch(lastpage, page)
 }
 
+// Should have a better gamestep which is random
 function gameStep(isTrue) {
     points_map[colours[currentcolor]] += isTrue // Add the point
 
@@ -94,10 +95,21 @@ function gameStep(isTrue) {
         if(currentquestion < 3) {
             currentquestion++
         } else {
-            // Endgame
+            endGame()
         }
     }
     console.log(points_map)
+}
+
+function endGame() {
+    var sum = 0
+    var pt_sum = 0
+    for(var i = 0; i < colours.length; i++) {
+        sum += (i+1) * (points_map[colours[i]])
+        pt_sum += points_map[colours[i]]
+    }
+
+    return (sum/pt_sum)
 }
 // ----------------------------------------------------- MAIN CODE ------------------------------------------------- //
 document.addEventListener("DOMContentLoaded", function(event) {
