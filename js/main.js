@@ -103,7 +103,6 @@ function gameStep(isTrue) {
 
 // Redirect them to the approriate status page
 function endGame() {
-    points_arr = [0,0,0,3,3,0]
     var guass_arr = [0,0,0,0,0,0,0,0,0,0,0,0]
     var filter = [0.242, 0.399, 0.242]
     var g_index = 1
