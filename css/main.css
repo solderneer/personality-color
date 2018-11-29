@@ -8,6 +8,8 @@ body {
      -moz-transition:background-color 1s ease;
      -o-transition:background-color 1s ease;
      transition:background-color 1s ease;
+
+     overflow: hidden;
 }
 
 h1 {
