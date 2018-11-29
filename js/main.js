@@ -34,6 +34,7 @@ var currentcolor = 0 // In terms of colours list index
 
 var points_arr = [0, 0, 0, 0, 0, 0]
 
+var yes_listener, no_listener
 // -------------------- UTILITIES --------------------- //
 function pageSwitch(selector1, selector2) {
     anime({
@@ -68,6 +69,51 @@ function pageSwitch(selector1, selector2) {
     });
 }
 
+function questionSwitch() {
+    anime({
+        targets: lastpage,
+        left: [
+            { value: '50%', duration: 0 },
+            { value: '30%', duration: 1000 }
+        ],
+        opacity: 0,
+        duration: 1000,
+        elasticity: 0,
+        loop: false,
+        being: function(anim) {
+            // Remove yes button listener
+            document.querySelector('.yes'+lastpage).removeEventListener('click', gameStep)
+            // Remove no button listener
+            document.querySelector('.no'+lastpage).removeEventListener('click', gameStep)
+        },
+        complete: function (anim) {
+            document.querySelector(lastpage).style.display = 'none'
+        },
+    });
+
+    anime({
+        targets: page,
+        left: [
+            { value: '70%', duration: 0 },
+            { value: '50%', duration: 1000 }
+        ],
+        opacity: 1,
+        duration: 1000,
+        elasticity: 0,
+        loop: false,
+        begin: function (anim) {
+            document.querySelector(page).style.display = 'flex'
+            document.querySelector(page).style.opacity = 0
+        },
+        complete: function (anim) {
+            // Initialize yes button listener
+            document.querySelector('.yes'+page).addEventListener('click', gameStep)
+            // Initialize no button listener
+            document.querySelector('.no'+page).addEventListener('click', gameStep)
+        }
+    });
+}
+
 function nextQuestion(question) {
     if (page === '.one') {
         lastpage = page
@@ -79,12 +125,14 @@ function nextQuestion(question) {
         document.querySelector('#q1').innerText = question
     }
 
-    pageSwitch(lastpage, page)
+    questionSwitch()
 }
 
 // Should have a better gamestep which is random
 function gameStep(isTrue) {
+    console.log(isTrue)
     points_arr[currentcolor] += isTrue // Add the point
+    var state = 0
 
     if (currentcolor < 5) {
         currentcolor++
@@ -94,11 +142,18 @@ function gameStep(isTrue) {
         if (currentquestion < 2) {
             currentquestion++
         } else {
-            return 1
+            state = 1
         }
     }
 
-    return 0
+    // Proceed to next state
+    if(state === 0) {
+        nextQuestion(questions_matrix[currentcolor][currentquestion])
+    } else if (state === 1) {
+        endGame()
+    }
+
+    console.log(points_arr)
 }
 
 // Redirect them to the approriate status page
@@ -149,44 +204,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
         document.querySelector('body').style.color = 'black'
         document.querySelector('.topnav').style.borderBottomColor = 'black'
 
+        // Init
         document.querySelector('#q1').innerText = questions_matrix[currentcolor][currentquestion]
+
+        // Initialize yes button listener
+        document.querySelector('.yes.one').addEventListener('click', gameStep)
+        // Initialize no button listener
+        document.querySelector('.no.one').addEventListener('click', gameStep)
+
         pageSwitch('.main', '.question.one')
     })
-
-    document.querySelector('.yes.one').addEventListener('click', function () {
-        var res = gameStep(1)
-        if(res === 0) {
-            nextQuestion(questions_matrix[currentcolor][currentquestion])
-        } else if (res === 1) {
-            endGame()
-        }
-    })
-
-    document.querySelector('.yes.two').addEventListener('click', function () {
-        var res = gameStep(1)
-        if(res === 0) {
-            nextQuestion(questions_matrix[currentcolor][currentquestion])
-        } else if (res === 1) {
-            endGame()
-        }
-    })
-
-    document.querySelector('.no.one').addEventListener('click', function () {
-        var res = gameStep(0)
-        if(res === 0) {
-            nextQuestion(questions_matrix[currentcolor][currentquestion])
-        } else if (res === 1) {
-            endGame()
-        }
-    })
-
-    document.querySelector('.no.two').addEventListener('click', function () {
-        var res = gameStep(0)
-        if(res === 0) {
-            nextQuestion(questions_matrix[currentcolor][currentquestion])
-        } else if (res === 1) {
-            endGame()
-        }
-    })
-
 })
