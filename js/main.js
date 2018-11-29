@@ -14,7 +14,7 @@ var hex_map = {
 }
 
 var colours = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
-var full_colors = ['red-purple', 'red', 'red-orange', 'orange', 'yellow-orange', 'yellow', 'yellow-green', 
+var full_colors = ['red-purple', 'red', 'red-orange', 'orange', 'yellow-orange', 'yellow', 'yellow-green',
                 'green', 'blue-green', 'blue', 'blue-purple', 'purple']
 
 var questions_matrix = [
@@ -80,11 +80,11 @@ function questionSwitch() {
         duration: 1000,
         elasticity: 0,
         loop: false,
-        being: function(anim) {
+        begin: function(anim) {
             // Remove yes button listener
-            document.querySelector('.yes'+lastpage).removeEventListener('click', gameStep)
+            document.querySelector('.yes'+lastpage).removeEventListener('click', yesStep)
             // Remove no button listener
-            document.querySelector('.no'+lastpage).removeEventListener('click', gameStep)
+            document.querySelector('.no'+lastpage).removeEventListener('click', noStep)
         },
         complete: function (anim) {
             document.querySelector(lastpage).style.display = 'none'
@@ -107,9 +107,9 @@ function questionSwitch() {
         },
         complete: function (anim) {
             // Initialize yes button listener
-            document.querySelector('.yes'+page).addEventListener('click', gameStep)
+            document.querySelector('.yes'+page).addEventListener('click', yesStep)
             // Initialize no button listener
-            document.querySelector('.no'+page).addEventListener('click', gameStep)
+            document.querySelector('.no'+page).addEventListener('click', noStep)
         }
     });
 }
@@ -127,8 +127,13 @@ function nextQuestion(question) {
 
     questionSwitch()
 }
+function yesStep() {
+    gameStep(1)
+}
 
-// Should have a better gamestep which is random
+function noStep() {
+    gameStep(0)
+}
 function gameStep(isTrue) {
     console.log(isTrue)
     points_arr[currentcolor] += isTrue // Add the point
@@ -208,9 +213,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
         document.querySelector('#q1').innerText = questions_matrix[currentcolor][currentquestion]
 
         // Initialize yes button listener
-        document.querySelector('.yes.one').addEventListener('click', gameStep)
+        document.querySelector('.yes.one').addEventListener('click', yesStep)
         // Initialize no button listener
-        document.querySelector('.no.one').addEventListener('click', gameStep)
+        document.querySelector('.no.one').addEventListener('click', noStep)
 
         pageSwitch('.main', '.question.one')
     })
