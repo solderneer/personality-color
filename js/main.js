@@ -208,6 +208,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         document.querySelector('body').style.background = 'white'
         document.querySelector('body').style.color = 'black'
         document.querySelector('.topnav').style.borderBottomColor = 'black'
+        document.querySelector('.footer').style.display = 'none'
 
         // Init
         document.querySelector('#q1').innerText = questions_matrix[currentcolor][currentquestion]
