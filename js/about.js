@@ -11,9 +11,10 @@ var hex_map = {
     'blue': '#039be5',
     'blue-purple': '#3563c8',
     'purple': '#5e35b1',
+    'home': '#FFFFFF',
 }
 
-var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
+var colors = ['home', 'red', 'orange', 'yellow', 'green', 'blue', 'purple']
 var current_color = 0;
 
 var touchstartX = 0;
@@ -106,16 +107,38 @@ function pageSwitchLeft(selector1, selector2) {
 }
 
 function rightPage() {
-    var nextcolor = mod((current_color + 1), 6)
+    var nextcolor = mod((current_color + 1), 7)
     pageSwitchRight('.'+colors[current_color], '.'+colors[nextcolor])
     document.querySelector('body').style.background = hex_map[colors[nextcolor]]
+    
+    if(colors[nextcolor] === 'home') {
+        document.querySelector('body').style.color = 'black'
+        document.querySelector('.topnav').style.borderBottomColor = 'black'
+    }
+
+    if(colors[current_color] === 'home') {
+        document.querySelector('body').style.color = 'white'
+        document.querySelector('.topnav').style.borderBottomColor = 'white'
+    }
+
     current_color = nextcolor
 }
 
 function leftPage() {
-    var nextcolor = mod((current_color - 1), 6)
+    var nextcolor = mod((current_color - 1), 7)
     pageSwitchLeft('.'+colors[current_color], '.'+colors[nextcolor])
     document.querySelector('body').style.background = hex_map[colors[nextcolor]]
+
+    if(colors[nextcolor] === 'home') {
+        document.querySelector('body').style.color = 'black'
+        document.querySelector('.topnav').style.borderBottomColor = 'black'
+    }
+
+    if(colors[current_color] === 'home') {
+        document.querySelector('body').style.color = 'white'
+        document.querySelector('.topnav').style.borderBottomColor = 'white'
+    }
+
     current_color = nextcolor
 }
 
