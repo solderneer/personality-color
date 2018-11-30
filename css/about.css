@@ -1,21 +1,19 @@
 /* Standard consistent element styles */
 body {
     font-family: 'Raleway', sans-serif;
-    color: black;
-    background-color: white;
+    color: white;
+    background-color: #e53935;
 
      /* Ease the transition between colors */
      -webkit-transition:background-color 1s ease;
      -moz-transition:background-color 1s ease;
      -o-transition:background-color 1s ease;
      transition:background-color 1s ease;
-
-     overflow: hidden;
 }
 
 h1 {
     font-family: 'Comfortaa', cursive;
-    font-size: 5rem;
+    font-size: 2.5rem;
     margin: 0px;
 }
 
@@ -23,6 +21,11 @@ h2 {
     font-family: 'Raleway', sans-serif;
     font-size: 1.5rem;
     margin: 0px;
+    font-weight: 300;
+}
+
+p {
+    font-weight: 400;
 }
 
 /* Navbar */
@@ -38,7 +41,7 @@ h2 {
     width: 15em;
     margin: 0 auto;
 
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid white;
 }
 
 .topnav a {
@@ -60,17 +63,52 @@ h2 {
     font-weight: 700;
 }
 
-/* Styling for the flexbox container */
-.container {
+.page {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
+    align-items: center;
+
+    text-align: center;
+    max-width: 60%;
+    display: none;
 }
 
-.container h1 {
+/* Left Right button styling */
+.fas {
     font-size: 3em;
-    margin: 0em 1em;
-
-    max-width: 9em;
+    transition: transform 0.5s;
+    background: transparent;
 }
+.fas:hover {
+    transition: transform 0.5s;
+    transform: scale(1.04);
+}
+
+.fa-angle-right {
+    position: absolute;
+    top: 90vh;
+    right: 1em;
+}
+
+.fa-angle-left {
+    position: absolute;
+    top: 90vh;
+    left: 1em;
+}
+
+@media screen and (min-width:600px) {
+    .fa-angle-right {
+        top: 48vh;
+    }
+    
+    .fa-angle-left {
+        top: 48vh;
+    }
+ }
