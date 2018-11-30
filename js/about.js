@@ -34,6 +34,10 @@ function pageSwitchRight(selector1, selector2) {
         duration: 1000,
         elasticity: 0,
         loop: false,
+        begin: function (anim) {
+            document.querySelector('#right').removeEventListener('click', rightPage)
+            document.querySelector('#left').removeEventListener('click', leftPage)
+        },
         complete: function (anim) {
             document.querySelector(selector1).style.display = 'none'
         },
@@ -52,6 +56,10 @@ function pageSwitchRight(selector1, selector2) {
         begin: function (anim) {
             document.querySelector(selector2).style.display = 'flex'
             document.querySelector(selector2).style.opacity = 0
+        },
+        complete: function (anim) {
+            document.querySelector('#right').addEventListener('click', rightPage)
+            document.querySelector('#left').addEventListener('click', leftPage)
         }
     });
 }
@@ -67,6 +75,10 @@ function pageSwitchLeft(selector1, selector2) {
         duration: 1000,
         elasticity: 0,
         loop: false,
+        begin: function (anim) {
+            document.querySelector('#right').removeEventListener('click', rightPage)
+            document.querySelector('#left').removeEventListener('click', leftPage)
+        },
         complete: function (anim) {
             document.querySelector(selector1).style.display = 'none'
         },
@@ -85,23 +97,29 @@ function pageSwitchLeft(selector1, selector2) {
         begin: function (anim) {
             document.querySelector(selector2).style.display = 'flex'
             document.querySelector(selector2).style.opacity = 0
+        },
+        complete: function (anim) {
+            document.querySelector('#right').addEventListener('click', rightPage)
+            document.querySelector('#left').addEventListener('click', leftPage)
         }
     });
 }
 
-document.addEventListener("DOMContentLoaded", function(event) {
-    document.querySelector('#right').addEventListener('click', function () {
-        var nextcolor = (current_color + 1) % 6
-        pageSwitchRight('.'+colors[current_color], '.'+colors[nextcolor])
-        document.querySelector('body').style.background = hex_map[colors[nextcolor]]
-        current_color = nextcolor
-    })
+function rightPage() {
+    var nextcolor = mod((current_color + 1), 6)
+    pageSwitchRight('.'+colors[current_color], '.'+colors[nextcolor])
+    document.querySelector('body').style.background = hex_map[colors[nextcolor]]
+    current_color = nextcolor
+}
 
-    document.querySelector('#left').addEventListener('click', function () {
-        var nextcolor = mod((current_color - 1), 6)
-        console.log(nextcolor)
-        pageSwitchLeft('.'+colors[current_color], '.'+colors[nextcolor])
-        document.querySelector('body').style.background = hex_map[colors[nextcolor]]
-        current_color = nextcolor
-    })
+function leftPage() {
+    var nextcolor = mod((current_color - 1), 6)
+    pageSwitchLeft('.'+colors[current_color], '.'+colors[nextcolor])
+    document.querySelector('body').style.background = hex_map[colors[nextcolor]]
+    current_color = nextcolor
+}
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelector('#right').addEventListener('click', rightPage)
+    document.querySelector('#left').addEventListener('click', leftPage)
 })
