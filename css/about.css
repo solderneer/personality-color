@@ -94,13 +94,13 @@ p {
 
 .fa-angle-right {
     position: absolute;
-    top: 90vh;
+    bottom: 2em;
     right: 1em;
 }
 
 .fa-angle-left {
     position: absolute;
-    top: 90vh;
+    bottom: 2em;
     left: 1em;
 }
 
