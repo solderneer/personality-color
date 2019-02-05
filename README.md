@@ -5,7 +5,7 @@ it's really fun.
 ## Technologies
 * Pure native javascript
 * Standard web stuff (HTML, CSS)
-* [Anime.js](https://animejs.com/] for fancy fading)
+* [Anime.js](https://animejs.com/) for fancy fading
 
 ![screenshot](screenshot.png)
 
