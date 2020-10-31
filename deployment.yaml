@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: personality-color
+  labels:
+    app: personality-color
+spec:
+  selector:
+    matchLabels:
+      app: personality-color
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: personality-color
+    spec:
+      containers:
+      - name: personality-color
+        image: registry.digitalocean.com/athens/personality-color:latest
+        ports:
+        - name: web
+          containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: personality-color
+  labels:
+    app: personality-color
+spec:
+  ports:
+    - protocol: TCP
+      name: web
+      port: 80
+  selector:
+    app: personality-color
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: personality-color-route
+  namespace: default
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`colorme.solderneer.me`)
+    kind: Rule
+    services:
+    - name: personality-color
+      port: 80
+  tls:
+    certResolver: myresolver
+
