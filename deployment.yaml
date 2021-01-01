@@ -43,6 +43,8 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: personality-color-route
+  labels:
+    app: personality-color
   namespace: default
 spec:
   entryPoints:
